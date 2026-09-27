@@ -36,4 +36,5 @@ Personalized outreach email generated
         ↓
 Resend Email API
         ↓
-Email sent to recipient
+Email sent through the configured email service
+
