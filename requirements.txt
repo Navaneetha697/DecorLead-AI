@@ -1,0 +1,6 @@
+Flask
+Flask-CORS
+requests
+python-dotenv
+mysql-connector-python
+resend
