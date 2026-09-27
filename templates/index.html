@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>DecorLead AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+            padding: 24px 20px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .api-badge {
+            padding: 8px 15px;
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.18);
+
+            font-size: 13px;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .hero p {
+            color: #6b7280;
+        }
+
+        /* SEARCH */
+
+        .search-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.07);
+
+            margin-bottom: 25px;
+        }
+        .search-grid {
+            display: grid;
+            grid-template-columns:
+            1fr
+            1fr
+            1fr;
+            gap: 16px;
+            align-items: end;
+        }
+
+.search-grid .primary-btn {
+    grid-column: 1 / -1;
+
+    width: 220px;
+
+    justify-self: center;
+
+    margin-top: 5px;
+}
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-control {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+
+            font-size: 15px;
+            outline: none;
+
+            background: white;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        .primary-btn {
+            border: none;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+
+            padding: 13px 22px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            min-height: 46px;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.92;
+        }
+
+        .primary-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* STATUS */
+
+        #statusArea {
+            margin-bottom: 25px;
+        }
+
+        .status {
+            padding: 14px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .status-info {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .status-success {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-error {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        /* RESULTS */
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .results-header h3 {
+            font-size: 22px;
+            color: #111827;
+        }
+
+        #resultCount {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .buyers-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .buyer-card {
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 7px 25px rgba(0,0,0,0.06);
+
+            display: flex;
+            flex-direction: column;
+
+            min-height: 350px;
+        }
+
+        .buyer-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.09);
+        }
+
+        .buyer-name {
+            font-size: 20px;
+            font-weight: 700;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+        }
+
+        .buyer-category {
+            display: inline-block;
+
+            background: #eef2ff;
+            color: #4338ca;
+
+            padding: 6px 9px;
+
+            border-radius: 15px;
+
+            font-size: 12px;
+
+            margin-bottom: 15px;
+        }
+
+        .buyer-info {
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            font-size: 14px;
+            line-height: 1.5;
+
+            color: #4b5563;
+
+            word-break: break-word;
+        }
+
+        .info-row strong {
+            color: #111827;
+        }
+
+        .email-found {
+            color: #047857;
+        }
+
+        .email-missing {
+            color: #9ca3af;
+        }
+
+        .website {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .website:hover {
+            text-decoration: underline;
+        }
+
+        .outreach-btn {
+            width: 100%;
+
+            border: none;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .outreach-btn:hover {
+            opacity: 0.92;
+        }
+
+        .outreach-btn:disabled {
+            background: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .empty-state {
+            background: white;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            color: #6b7280;
+        }
+
+        .empty-state h3 {
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        /* MODAL */
+
+        .modal-overlay {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(15,23,42,0.65);
+
+            z-index: 9999;
+
+            padding: 20px;
+
+            overflow-y: auto;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 700px;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+            color: #111827;
+        }
+
+        .close-btn {
+            border: none;
+            background: transparent;
+
+            font-size: 28px;
+
+            color: #6b7280;
+
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #111827;
+        }
+
+        .modal-group {
+            margin-bottom: 18px;
+        }
+
+        .modal-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .modal-input,
+        .modal-textarea {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .modal-input:focus,
+        .modal-textarea:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        .modal-textarea {
+            min-height: 280px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        /*
+            IMPORTANT:
+            emailTo is intentionally editable.
+            No readonly.
+            No disabled.
+        */
+
+        #emailTo {
+            background: white;
+            color: #111827;
+
+            cursor: text;
+        }
+
+        .modal-actions {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .cancel-btn {
+            border: 1px solid #d1d5db;
+
+            background: white;
+
+            color: #374151;
+
+            padding: 12px 18px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .cancel-btn:hover {
+            background: #f9fafb;
+        }
+
+        .send-btn {
+            border: none;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .send-btn:hover {
+            opacity: 0.92;
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #emailStatus {
+            margin-top: 15px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 30px 20px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+
+            .search-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .buyers-grid {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buyers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 26px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .cancel-btn,
+            .send-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header-inner">
+
+            <div class="brand">
+
+                <h1>
+                    🏠 DecorLead AI
+                </h1>
+
+                <p>
+                    Home Decor Buyer Finder & Outreach Platform
+                </p>
+
+            </div>
+
+            <div class="api-badge">
+                API Powered
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="hero">
+
+            <h2>
+                Find Potential Home Decor Buyers
+            </h2>
+
+            <p>
+                Search US businesses using APIs and prepare personalized outreach emails.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH CARD -->
+
+        <section class="search-card">
+
+            <div class="search-grid">
+
+                <div class="form-group">
+
+                    <label for="product">
+                        Product
+                    </label>
+
+                    <input
+                        type="text"
+                        id="product"
+                        class="form-control"
+                        value=""
+                        placeholder="Example: Wall Decor"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="buyerType">
+                        Buyer Type
+                    </label>
+                    <select id="buyerType" class="form-control">
+                        <option value="" selected disabled>
+                            Select buyer type
+                        </option>
+                        <option value="Furniture Store">
+                            Furniture Store
+                        </option>
+                        <option value="Home Decor Store">
+                            Home Decor Store
+                        </option>
+                        <option value="Interior Designer">
+                            Interior Designer
+                        </option>
+                        <option value="Gift Shop">
+                            Gift Shop
+                        </option>
+                        <option value="Home Furnishing Store">
+                            Home Furnishing Store
+                        </option>
+                    </select>
+
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="location">
+                        US Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        class="form-control"
+                        value=""
+                        placeholder="Enter US city or location"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="searchButton"
+                    class="primary-btn"
+                    onclick="searchBuyers()"
+                >
+                    🔍 Find Buyers
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATUS -->
+
+        <div id="statusArea"></div>
+
+
+        <!-- RESULTS -->
+
+        <section>
+
+            <div class="results-header">
+
+                <h3>
+                    Potential Buyers
+                </h3>
+
+                <span id="resultCount">
+                    No search performed yet
+                </span>
+
+            </div>
+
+
+            <div
+                id="buyersGrid"
+                class="buyers-grid"
+            >
+
+                <div class="empty-state">
+
+                    <h3>
+                        Start your search
+                    </h3>
+
+                    <p>
+                        Enter a product and US location to find potential business leads.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- EMAIL MODAL -->
+
+    <div
+        id="emailModal"
+        class="modal-overlay"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3>
+                    📧 Prepare Outreach Email
+                </h3>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    onclick="closeEmailModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label for="emailTo">
+                    To
+                </label>
+
+                <input
+                    type="email"
+                    id="emailTo"
+                    class="modal-input"
+                    placeholder="Enter recipient email"
+                >
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label for="emailSubject">
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="emailSubject"
+                    class="modal-input"
+                    placeholder="Email subject"
+                >
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label for="emailBody">
+                    Message
+                </label>
+
+                <textarea
+                    id="emailBody"
+                    class="modal-textarea"
+                    placeholder="Email message"
+                ></textarea>
+
+            </div>
+
+
+            <div id="emailStatus"></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeEmailModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    id="sendEmailButton"
+                    class="send-btn"
+                    onclick="sendEmail()"
+                >
+                    📧 Send Outreach Email
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        DecorLead AI © 2026
+    </footer>
+    <script>
+
+    // =====================================================
+    // GLOBAL VARIABLES
+    // =====================================================
+
+    let currentProduct = "";
+
+    let currentBuyer = null;
+
+    let buyersData = [];
+
+
+    // =====================================================
+    // ESCAPE HTML
+    // =====================================================
+
+    function escapeHtml(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // =====================================================
+    // STATUS
+    // =====================================================
+
+    function showStatus(
+        message,
+        type
+    ) {
+
+        const statusArea =
+            document.getElementById(
+                "statusArea"
+            );
+
+        let className =
+            "status-info";
+
+        if (
+            type === "success"
+        ) {
+            className =
+                "status-success";
+        }
+
+        if (
+            type === "error"
+        ) {
+            className =
+                "status-error";
+        }
+
+        statusArea.innerHTML = `
+            <div class="status ${className}">
+                ${escapeHtml(message)}
+            </div>
+        `;
+
+    }
+
+
+    // =====================================================
+    // EMAIL STATUS
+    // =====================================================
+
+    function showEmailStatus(
+        message,
+        type
+    ) {
+
+        const element =
+            document.getElementById(
+                "emailStatus"
+            );
+
+        let className =
+            "status-info";
+
+        if (
+            type === "success"
+        ) {
+            className =
+                "status-success";
+        }
+
+        if (
+            type === "error"
+        ) {
+            className =
+                "status-error";
+        }
+
+        element.innerHTML = `
+            <div class="status ${className}">
+                ${escapeHtml(message)}
+            </div>
+        `;
+
+    }
+
+
+    // =====================================================
+    // SEARCH BUYERS
+    // =====================================================
+
+    async function searchBuyers() {
+
+        const product =
+            document
+                .getElementById("product")
+                .value
+                .trim();
+
+        const buyerType =
+            document
+                .getElementById("buyerType")
+                .value
+                .trim();
+
+        const location =
+            document
+                .getElementById("location")
+                .value
+                .trim();
+
+        const button =
+            document.getElementById(
+                "searchButton"
+            );
+
+
+        // VALIDATION
+
+        if (!product) {
+
+            showStatus(
+                "Please enter a product.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!buyerType) {
+
+            showStatus(
+                "Please select a buyer type.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!location) {
+
+            showStatus(
+                "Please enter a US location.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        currentProduct =
+            product;
+
+
+        // LOADING
+
+        button.disabled = true;
+
+        button.innerHTML =
+            "⏳ Searching...";
+
+
+        showStatus(
+            "Searching for potential buyers...",
+            "info"
+        );
+
+
+        document.getElementById(
+            "buyersGrid"
+        ).innerHTML = `
+            <div class="empty-state">
+                <h3>Searching...</h3>
+                <p>
+                    Finding potential businesses using the API.
+                </p>
+            </div>
+        `;
+
+
+        try {
+
+            // API REQUEST
+
+            const response =
+                await fetch(
+                    "/api/search-buyers",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            product:
+                                product,
+
+                            buyer_type:
+                                buyerType,
+
+                            location:
+                                location
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Buyer search response:",
+                data
+            );
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to find buyers."
+                );
+
+            }
+
+
+            buyersData =
+                Array.isArray(
+                    data.buyers
+                )
+                    ? data.buyers
+                    : [];
+
+
+            renderBuyers(
+                buyersData
+            );
+
+
+            document.getElementById(
+                "resultCount"
+            ).textContent =
+                `${buyersData.length} potential buyer${
+                    buyersData.length === 1
+                        ? ""
+                        : "s"
+                } found`;
+
+
+            if (
+                buyersData.length > 0
+            ) {
+
+                showStatus(
+                    `Found ${buyersData.length} potential buyer${
+                        buyersData.length === 1
+                            ? ""
+                            : "s"
+                    } in ${location}.`,
+                    "success"
+                );
+
+            } else {
+
+                showStatus(
+                    "No matching buyers found. Try another location or buyer type.",
+                    "info"
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Search error:",
+                error
+            );
+
+
+            document.getElementById(
+                "buyersGrid"
+            ).innerHTML = `
+                <div class="empty-state">
+                    <h3>Search failed</h3>
+                    <p>
+                        ${escapeHtml(
+                            error.message
+                        )}
+                    </p>
+                </div>
+            `;
+
+
+            document.getElementById(
+                "resultCount"
+            ).textContent =
+                "Search failed";
+
+
+            showStatus(
+                error.message ||
+                "Unable to find buyers.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.innerHTML =
+                "🔍 Find Buyers";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // RENDER BUYERS
+    // =====================================================
+
+    function renderBuyers(
+        buyers
+    ) {
+
+        const grid =
+            document.getElementById(
+                "buyersGrid"
+            );
+
+
+        if (
+            !buyers ||
+            buyers.length === 0
+        ) {
+
+            grid.innerHTML = `
+                <div class="empty-state">
+
+                    <h3>
+                        No potential buyers found
+                    </h3>
+
+                    <p>
+                        Try another US location or buyer type.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        grid.innerHTML =
+            buyers
+                .map(
+                    (
+                        buyer,
+                        index
+                    ) => createBuyerCard(
+                        buyer,
+                        index
+                    )
+                )
+                .join("");
+
+    }
+
+
+    // =====================================================
+    // CREATE BUYER CARD
+    // =====================================================
+
+    function createBuyerCard(
+        buyer,
+        index
+    ) {
+
+        const name =
+            buyer.name ||
+            "Unknown Business";
+
+
+        const category =
+            buyer.category ||
+            "Business";
+
+
+        const phone =
+            buyer.phone ||
+            "Not available";
+
+
+        const email =
+            buyer.email ||
+            "";
+
+
+        const rating =
+            buyer.rating !== null &&
+            buyer.rating !== undefined
+                ? `⭐ ${buyer.rating}`
+                : "⭐ Not available";
+
+
+        const address =
+            buyer.address ||
+            [
+                buyer.city,
+                buyer.state,
+                buyer.postcode
+            ]
+            .filter(Boolean)
+            .join(", ") ||
+            "Address not available";
+
+
+        const website =
+            buyer.website ||
+            "";
+
+
+        let emailSection = "";
+
+
+        if (email) {
+
+            emailSection = `
+                <div class="info-row email-found">
+
+                    📧
+                    <strong>Email:</strong>
+
+                    ${escapeHtml(email)}
+
+                </div>
+            `;
+
+        } else {
+
+            emailSection = `
+                <div class="info-row email-missing">
+
+                    📧
+                    <strong>Email:</strong>
+
+                    Public email not available
+
+                </div>
+            `;
+
+        }
+
+
+        let websiteSection = "";
+
+
+        if (website) {
+
+            let url =
+                String(website).trim();
+
+
+            if (
+                !url.startsWith("http://") &&
+                !url.startsWith("https://")
+            ) {
+
+                url =
+                    "https://" + url;
+
+            }
+
+
+            websiteSection = `
+                <div class="info-row">
+
+                    🌐
+                    <strong>Website:</strong>
+
+                    <a
+                        class="website"
+                        href="${escapeHtml(url)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visit Website
+                    </a>
+
+                </div>
+            `;
+
+        }
+
+
+        let outreachButton = "";
+
+
+        if (email) {
+
+            outreachButton = `
+                <button
+                    type="button"
+                    class="outreach-btn"
+                    onclick="prepareOutreachEmail(${index})"
+                >
+                    📧 Prepare Outreach Email
+                </button>
+            `;
+
+        } else {
+
+            outreachButton = `
+                <button
+                    type="button"
+                    class="outreach-btn"
+                    disabled
+                >
+                    📧 Email Not Available
+                </button>
+            `;
+
+        }
+
+
+        return `
+
+            <div class="buyer-card">
+
+                <div class="buyer-name">
+                    ${escapeHtml(name)}
+                </div>
+
+                <div class="buyer-category">
+                    ${escapeHtml(category)}
+                </div>
+
+                <div class="buyer-info">
+
+                    <div class="info-row">
+                        ${escapeHtml(rating)}
+                    </div>
+
+                    <div class="info-row">
+
+                        📞
+                        <strong>Phone:</strong>
+
+                        ${escapeHtml(phone)}
+
+                    </div>
+
+                    ${emailSection}
+
+                    <div class="info-row">
+
+                        📍
+                        <strong>Address:</strong>
+
+                        ${escapeHtml(address)}
+
+                    </div>
+
+                    ${websiteSection}
+
+                </div>
+
+                ${outreachButton}
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =====================================================
+    // PREPARE OUTREACH EMAIL
+    // =====================================================
+
+    function prepareOutreachEmail(
+        index
+    ) {
+
+        console.log(
+            "Prepare outreach clicked:",
+            index
+        );
+
+
+        const buyer =
+            buyersData[index];
+
+
+        if (!buyer) {
+
+            showStatus(
+                "Buyer information is unavailable.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        currentBuyer =
+            buyer;
+
+
+        const businessName =
+            buyer.name ||
+            "Business";
+
+
+        const email =
+            buyer.email ||
+            "";
+
+
+        const subject =
+            `${currentProduct} Product Partnership Opportunity`;
+
+
+        const message =
+`Hello ${businessName},
+
+I am reaching out regarding our home decor products.
+
+We are currently looking to connect with businesses that may be interested in products such as ${currentProduct}.
+
+We would be happy to share our product details, pricing, and partnership information.
+
+Please let me know if you would be interested in learning more.
+
+Thank you for your time.
+
+Best regards,
+DecorLead AI`;
+
+
+        // GET EMAIL INPUT
+
+        const emailInput =
+            document.getElementById(
+                "emailTo"
+            );
+
+
+        if (!emailInput) {
+
+            console.error(
+                "emailTo element not found"
+            );
+
+            return;
+        }
+
+
+        /*
+            FORCE EDITABLE
+        */
+
+        emailInput.removeAttribute(
+            "readonly"
+        );
+
+        emailInput.removeAttribute(
+            "disabled"
+        );
+
+        emailInput.readOnly =
+            false;
+
+        emailInput.disabled =
+            false;
+
+
+        // SET VALUES
+
+        emailInput.value =
+            email;
+
+
+        document.getElementById(
+            "emailSubject"
+        ).value =
+            subject;
+
+
+        document.getElementById(
+            "emailBody"
+        ).value =
+            message;
+
+
+        document.getElementById(
+            "emailStatus"
+        ).innerHTML = "";
+
+
+        // SHOW MODAL
+
+        document.getElementById(
+            "emailModal"
+        ).classList.add(
+            "show"
+        );
+
+
+        // FOCUS
+
+        setTimeout(
+            () => {
+
+                emailInput.focus();
+
+                emailInput.select();
+
+            },
+            100
+        );
+
+    }
+    // =====================================================
+    // CLOSE EMAIL MODAL
+    // =====================================================
+
+    function closeEmailModal() {
+
+        document.getElementById(
+            "emailModal"
+        ).classList.remove(
+            "show"
+        );
+
+
+        document.getElementById(
+            "emailStatus"
+        ).innerHTML = "";
+
+    }
+
+
+    // =====================================================
+    // SEND EMAIL
+    // =====================================================
+
+    async function sendEmail() {
+
+        const to =
+            document
+                .getElementById("emailTo")
+                .value
+                .trim();
+
+
+        const subject =
+            document
+                .getElementById("emailSubject")
+                .value
+                .trim();
+
+
+        const body =
+            document
+                .getElementById("emailBody")
+                .value
+                .trim();
+
+
+        const button =
+            document.getElementById(
+                "sendEmailButton"
+            );
+
+
+        // VALIDATE EMAIL
+
+        if (!to) {
+
+            showEmailStatus(
+                "Please enter a recipient email.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            !emailPattern.test(to)
+        ) {
+
+            showEmailStatus(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!subject) {
+
+            showEmailStatus(
+                "Please enter an email subject.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!body) {
+
+            showEmailStatus(
+                "Please enter an email message.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        // LOADING
+
+        button.disabled = true;
+
+        button.innerHTML =
+            "⏳ Sending...";
+
+
+        showEmailStatus(
+            "Sending outreach email...",
+            "info"
+        );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/send-email",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            to:
+                                to,
+
+                            subject:
+                                subject,
+
+                            body:
+                                body
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Email API response:",
+                data
+            );
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to send email."
+                );
+
+            }
+
+
+            showEmailStatus(
+                "✅ Outreach email sent successfully!",
+                "success"
+            );
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Email sending error:",
+                error
+            );
+
+
+            showEmailStatus(
+                "❌ " +
+                (
+                    error.message ||
+                    "Unable to send email."
+                ),
+                "error"
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.innerHTML =
+                "📧 Send Outreach Email";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // CLICK OUTSIDE MODAL
+    // =====================================================
+
+    document
+        .getElementById("emailModal")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeEmailModal();
+
+                }
+
+            }
+        );
+
+
+    // =====================================================
+    // ESCAPE KEY
+    // =====================================================
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeEmailModal();
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // BACKEND HEALTH CHECK
+    // =====================================================
+
+    async function checkBackend() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/health"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Backend health:",
+                data
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Backend health check failed:",
+                error
+            );
+
+        }
+
+    }
+
+
+    checkBackend();
+
+</script>
+
+</body>
+
+</html>
